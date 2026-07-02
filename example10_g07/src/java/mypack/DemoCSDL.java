@@ -22,7 +22,7 @@ public class DemoCSDL extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        Region region = new Region();
+        RegionDAO region = new RegionDAOImp();
         List<Region> listRegion = region.showAllRegion();
         
         request.setAttribute("listRegion", listRegion);
