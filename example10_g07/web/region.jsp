@@ -52,6 +52,8 @@
                 <tr>
                     <th>Region ID</th>
                     <th>Region Description</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,6 +61,8 @@
                 <tr>
                     <td><%= r.getRegionID()%></td>
                     <td><%= r.getRegionDescription()%></td>
+                    <td><a href="DemoCSDL?action=edit&id=<%= r.getRegionID()%>"><img src="resources/images/icon_edit.png"/></a></td>
+                    <td><a href="DemoCSDL?action=delete&id=<%= r.getRegionID()%>"><img src="resources/images/icon_delete.png" /></a></td>
                 </tr>
                 <% }%>
             </tbody>

@@ -20,21 +20,35 @@ public class DemoCSDL extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();        
+        PrintWriter out = response.getWriter();
         RegionDAO region = new RegionDAOImp();
 //Insert
-        if(request.getParameter("btnAdd")!=null){
+        if (request.getParameter("btnAdd") != null) {
             Region r = new Region(Integer.parseInt(request.getParameter("regionID")), request.getParameter("regionDescription"));
             System.out.println(r.getRegionID());
             region.insertRegion(r);
         }
-        
+//Edit
+        if (request.getParameter("action") != null && request.getParameter("action").equals("edit")) {
+            if (request.getParameter("id") != null) {
+                //Tim Region can edit
+                Region regionEdit = region.findRegionbyID(Integer.parseInt(request.getParameter("id")));
+                request.setAttribute("regionEdit", regionEdit);
+            }
+        }
+//Delete
+        if (request.getParameter("action") != null && request.getParameter("action").equals("delete")) {
+            if (request.getParameter("id") != null) {
+                region.deleteRegion(Integer.parseInt(request.getParameter("id")));
+            }
+        }
+
 //View
-        List<Region> listRegion = region.showAllRegion();        
+        List<Region> listRegion = region.showAllRegion();
         request.setAttribute("listRegion", listRegion);
         RequestDispatcher dis = getServletContext().getRequestDispatcher("/region.jsp");
         dis.forward(request, response);
-        
+
 //        for(Region r:listRegion){
 //            out.print(r.getRegionID()+" "+r.getRegionDescription());
 //        }                

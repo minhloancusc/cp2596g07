@@ -55,7 +55,16 @@ public class RegionDAOImp implements RegionDAO {
 
     @Override
     public void deleteRegion(int id) {
-
+        try {
+            Connection conn = MyConnection.getConnection();
+            String sql = "delete Region where RegionID=?";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, id);            
+            pstm.executeUpdate();
+            System.out.println("Delete thanh cong");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
 
     @Override
@@ -68,7 +77,20 @@ public class RegionDAOImp implements RegionDAO {
     @Override
     public Region findRegionbyID(int id) {
         Region region = null;
-        
+        try {            
+            Connection conn = MyConnection.getConnection();            
+            String sql = "select RegionID,RegionDescription from Region where RegionID=?";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                region = new Region(rs.getInt("RegionID"), rs.getString("RegionDescription"));               
+            }
+            conn.close();
+            return region;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }         
         return region;
     }
 
