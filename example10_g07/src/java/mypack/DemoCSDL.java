@@ -36,6 +36,10 @@ public class DemoCSDL extends HttpServlet {
                 request.setAttribute("regionEdit", regionEdit);
             }
         }
+        if (request.getParameter("btnEdit") != null) {
+            Region r = new Region(Integer.parseInt(request.getParameter("regionID")), request.getParameter("regionDescription"));
+            region.editRegion(r);
+        }
 //Delete
         if (request.getParameter("action") != null && request.getParameter("action").equals("delete")) {
             if (request.getParameter("id") != null) {

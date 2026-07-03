@@ -50,7 +50,17 @@ public class RegionDAOImp implements RegionDAO {
 
     @Override
     public void editRegion(Region r) {
-
+        try {
+            Connection conn = MyConnection.getConnection();
+            String sql = "update Region set RegionDescription =? where RegionID=?";
+            PreparedStatement pstm = conn.prepareStatement(sql);            
+            pstm.setString(1, r.getRegionDescription());
+            pstm.setInt(2, r.getRegionID());
+            pstm.executeUpdate();
+            System.out.println("Update thanh cong");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
 
     @Override
