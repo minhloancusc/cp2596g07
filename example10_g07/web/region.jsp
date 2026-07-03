@@ -14,6 +14,13 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%
+            if(request.getAttribute("regionEdit")!=null){
+                Region regionEdit = (Region)request.getAttribute("regionEdit");
+                out.print(regionEdit.getRegionID());
+                out.print(regionEdit.getRegionDescription());
+            }
+        %>
         <h1>Region</h1>
         <form method="POST" action="DemoCSDL">
             <table border="0">
