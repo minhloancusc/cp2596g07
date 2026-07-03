@@ -14,9 +14,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%
+        <%  Region regionEdit = null;
             if(request.getAttribute("regionEdit")!=null){
-                Region regionEdit = (Region)request.getAttribute("regionEdit");
+                regionEdit = (Region)request.getAttribute("regionEdit");
                 out.print(regionEdit.getRegionID());
                 out.print(regionEdit.getRegionDescription());
             }
@@ -32,11 +32,11 @@
                 <tbody>
                     <tr>
                         <td>Region ID</td>
-                        <td><input type="text" name="regionID" value="" /></td>
+                        <td><input type="text" name="regionID" value="<%= ((regionEdit!=null)?regionEdit.getRegionID():"") %>" /></td>
                     </tr>
                     <tr>
                         <td>Region Description</td>
-                        <td><input type="text" name="regionDescription" value="" /></td>
+                        <td><input type="text" name="regionDescription" value="<%= ((regionEdit!=null)?regionEdit.getRegionDescription():"") %>" /></td>
                     </tr>
                     <tr>
                         <td></td>
