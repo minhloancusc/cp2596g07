@@ -20,11 +20,17 @@ public class DemoCSDL extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        
+        PrintWriter out = response.getWriter();        
         RegionDAO region = new RegionDAOImp();
-        List<Region> listRegion = region.showAllRegion();
+//Insert
+        if(request.getParameter("btnAdd")!=null){
+            Region r = new Region(Integer.parseInt(request.getParameter("regionID")), request.getParameter("regionDescription"));
+            System.out.println(r.getRegionID());
+            region.insertRegion(r);
+        }
         
+//View
+        List<Region> listRegion = region.showAllRegion();        
         request.setAttribute("listRegion", listRegion);
         RequestDispatcher dis = getServletContext().getRequestDispatcher("/region.jsp");
         dis.forward(request, response);

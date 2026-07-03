@@ -15,6 +15,35 @@
     </head>
     <body>
         <h1>Region</h1>
+        <form method="POST" action="DemoCSDL">
+            <table border="0">
+                <thead>
+                    <tr>
+                        <th>Region Form</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Region ID</td>
+                        <td><input type="text" name="regionID" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Region Description</td>
+                        <td><input type="text" name="regionDescription" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="Add" name="btnAdd" />
+                            <input type="reset" value="Reset" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </form>
+        <br/>
+        <!--View-->
         <%
             List<Region> listRegion = (List<Region>) request.getAttribute("listRegion");
         %>
