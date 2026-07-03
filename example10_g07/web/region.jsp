@@ -17,8 +17,6 @@
         <%  Region regionEdit = null;
             if(request.getAttribute("regionEdit")!=null){
                 regionEdit = (Region)request.getAttribute("regionEdit");
-                out.print(regionEdit.getRegionID());
-                out.print(regionEdit.getRegionDescription());
             }
         %>
         <h1>Region</h1>
@@ -41,7 +39,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <input type="submit" value="Add" name="btnAdd" />
+                            <input type="submit" value="<%= ((regionEdit!=null)?"Edit":"Add") %>" name="<%= ((regionEdit!=null)?"btnEdit":"btnAdd") %>" />
                             <input type="reset" value="Reset" />
                         </td>
                     </tr>
