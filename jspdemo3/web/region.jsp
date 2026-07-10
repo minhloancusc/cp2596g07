@@ -15,8 +15,24 @@
         delete Region where RegionID = ?
         <sql:param value="${param.id}"/>
     </sql:update> 
-    <c:out value="Xoa thanh cong"/>
-</c:if>            
+    <script>alert("Xoa Thanh Cong");</script>
+</c:if> 
+<!--Edit-->
+<c:if test="${(!empty param.action) &&(param.action=='edit')}">  
+    <sql:query var="rs2" dataSource="${conn}">
+        select RegionID,RegionDescription from Region where RegionID=?
+        <sql:param value="${param.id}"/>
+    </sql:query>
+    <c:set var="editRegion" value="${rs2.rows}"/>
+</c:if>
+<c:if test="${!empty param.editRegion}">
+    <sql:update dataSource="${conn}">
+        update Region set RegionDescription=? where RegionID=?
+        <sql:param value="${param.regionDescription}"/>
+        <sql:param value="${param.regionID}"/>        
+    </sql:update>  
+    <script>alert("Update Thanh Cong");</script>    
+</c:if>        
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,16 +52,16 @@
                 <tbody>
                     <tr>
                         <td>Region ID</td>
-                        <td><input type="text" name="regionID" value="" /></td>
+                        <td><input type="text" name="regionID" value="${editRegion[0].RegionID}" /></td>
                     </tr>
                     <tr>
                         <td>Region Description</td>
-                        <td><input type="text" name="regionDescription" value="" /></td>
+                        <td><input type="text" name="regionDescription" value="${editRegion[0].RegionDescription}" /></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <input type="submit" value="Add" name="addRegion" />
+                            <input type="submit" value="${(empty editRegion)?'Add':'Edit'}" name="${(empty editRegion)?'addRegion':'editRegion'}" />
                             <input type="reset" value="Reset" />
                         </td>
                     </tr>
