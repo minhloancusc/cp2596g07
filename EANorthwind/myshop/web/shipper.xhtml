@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+    <h:head>
+        <title>Shippers</title>
+    </h:head>
+    <h:body>
+        <h1>Shippers</h1>
+        <h:form id="fshipper">
+            <h:inputHidden value="#{shippersMB.shiper.shipperID}"/>            
+            <h:panelGrid columns="2">
+                <h:outputLabel for="shipperID" value="Shipper ID"/>
+                <h:outputText value="#{shippersMB.shiper.shipperID}"/>                
+
+                <h:outputLabel for="companyName" value="CompanyName"/>
+                <h:inputText id="companyName" value="#{shippersMB.shiper.companyName}"/>
+
+                <h:outputLabel for="phone" value="Phone"/>
+                <h:inputText id="phone" value="#{shippersMB.shiper.phone}"/>
+
+                <h:outputText value=""/>
+                <h:panelGroup>
+                    <h:commandButton value="Add" action="#{shippersMB.saveShipper()}" type="submit"/>
+                    <h:commandButton value="Reset" type="reset"/>
+                </h:panelGroup>
+            </h:panelGrid>
+        </h:form>
+        <!-- Show all Region -->
+        <h:dataTable var="itemShipper" value="#{shippersMB.showAllShippers()}">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                <h:outputText value="#{itemShipper.shipperID}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Company Name</f:facet>
+                <h:outputText value="#{itemShipper.companyName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Phone</f:facet>
+                <h:outputText value="#{itemShipper.phone}"/>
+            </h:column>
+
+
+            <h:column>
+                <f:facet name="header">Edit</f:facet>
+                <h:form>
+                    <h:commandButton value="Edit" action="#{shippersMB.editShipper(itemShipper.shipperID)}" />
+                </h:form>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Delete</f:facet>
+                <h:form>
+                    <h:commandButton value="Delete" action="#{shippersMB.deleteShipper(itemShipper.shipperID)}"/>
+                </h:form>
+            </h:column>
+
+        </h:dataTable>
+    </h:body>
+</html>
